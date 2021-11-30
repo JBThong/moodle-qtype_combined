@@ -113,11 +113,11 @@ Feature: Test all the basic functionality of combined question type
     # Attempt the question
     # Test html editor for answer field in Combined MultiResponse.
     And "//label/b[contains(text(), 'bromine')]" "xpath_element" should be visible
-    And "//label/b[contains(text(), 'O oxygen')]" "xpath_element" should be visible
+    And "//div[@data-region='answer-label']//div/b[contains(., 'O oxygen')]" "xpath_element" should be visible
     And I set the field "Answer 1" to "2.88"
     And I set the field "Answer 2" to "ethanoic acid"
     And I set the field "Answer 4" to "Vinagrette"
-    And I set the field "H hydrogen" to "1"
+    And I click on "H hydrogen" "qtype_combined > Answer"
     And I press "Check"
     Then I should see "Part of your answer requires attention :"
     And I should see "Input 3 (check box group) - Please select at least one answer."
@@ -140,7 +140,7 @@ Feature: Test all the basic functionality of combined question type
     When I press "Start again"
     And I press "Fill in correct responses"
     Then the field "Answer 2" matches value "ethanoic acid"
-    Then the field "H hydrogen" matches value "1"
+    And "//div[@data-region='answer-label']//div[contains(text(), 'H hydrogen')]/ancestor::div/input[@checked='checked']" "xpath_element" should be visible
 
     And I switch to the main window
 
